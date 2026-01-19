@@ -1,94 +1,115 @@
-> **Note:** This repository contains Anthropic's implementation of skills for Claude. For information about the Agent Skills standard, see [agentskills.io](http://agentskills.io).
+# Zalo Mini App Skill
 
-# Skills
-Skills are folders of instructions, scripts, and resources that Claude loads dynamically to improve performance on specialized tasks. Skills teach Claude how to complete specific tasks in a repeatable way, whether that's creating documents with your company's brand guidelines, analyzing data using your organization's specific workflows, or automating personal tasks.
+Build Zalo Mini Apps - lightweight web apps running inside the Zalo super-app platform.
 
-For more information, check out:
-- [What are skills?](https://support.claude.com/en/articles/12512176-what-are-skills)
-- [Using skills in Claude](https://support.claude.com/en/articles/12512180-using-skills-in-claude)
-- [How to create custom skills](https://support.claude.com/en/articles/12512198-creating-custom-skills)
-- [Equipping agents for the real world with Agent Skills](https://anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills)
+## Features
 
-# About This Repository
+- **ZaUI Components** - Button, Input, Modal, Tabs, Avatar, Calendar, List, and 50+ more
+- **JavaScript APIs** - authorize, getUserInfo, getPhoneNumber, getLocation, Storage, Camera
+- **Checkout SDK** - Payment integration for Vietnamese market
+- **Design Guidelines** - Colors, typography, spacing, icons following Zalo standards
+- **Development Tools** - zmp-cli, VSCode extension, debugging
 
-This repository contains skills that demonstrate what's possible with Claude's skills system. These skills range from creative applications (art, music, design) to technical tasks (testing web apps, MCP server generation) to enterprise workflows (communications, branding, etc.).
+## Installation
 
-Each skill is self-contained in its own folder with a `SKILL.md` file containing the instructions and metadata that Claude uses. Browse through these skills to get inspiration for your own skills or to understand different patterns and approaches.
+### Option 1: Using add-skill CLI (Recommended)
 
-Many skills in this repo are open source (Apache 2.0). We've also included the document creation & editing skills that power [Claude's document capabilities](https://www.anthropic.com/news/create-files) under the hood in the [`skills/docx`](./skills/docx), [`skills/pdf`](./skills/pdf), [`skills/pptx`](./skills/pptx), and [`skills/xlsx`](./skills/xlsx) subfolders. These are source-available, not open source, but we wanted to share these with developers as a reference for more complex skills that are actively used in a production AI application.
+```bash
+# Install to current project
+npx add-skill suminhthanh/zalo-mini-app-skills
 
-## Disclaimer
+# Install globally
+npx add-skill suminhthanh/zalo-mini-app-skills -g
 
-**These skills are provided for demonstration and educational purposes only.** While some of these capabilities may be available in Claude, the implementations and behaviors you receive from Claude may differ from what is shown in these skills. These skills are meant to illustrate patterns and possibilities. Always test skills thoroughly in your own environment before relying on them for critical tasks.
-
-# Skill Sets
-- [./skills](./skills): Skill examples for Creative & Design, Development & Technical, Enterprise & Communication, and Document Skills
-- [./spec](./spec): The Agent Skills specification
-- [./template](./template): Skill template
-
-# Try in Claude Code, Claude.ai, and the API
-
-## Claude Code
-You can register this repository as a Claude Code Plugin marketplace by running the following command in Claude Code:
-```
-/plugin marketplace add anthropics/skills
+# Install for specific agent
+npx add-skill suminhthanh/zalo-mini-app-skills -a claude-code
 ```
 
-Then, to install a specific set of skills:
-1. Select `Browse and install plugins`
-2. Select `anthropic-agent-skills`
-3. Select `document-skills` or `example-skills`
-4. Select `Install now`
+### Option 2: Manual Installation
 
-Alternatively, directly install either Plugin via:
-```
-/plugin install document-skills@anthropic-agent-skills
-/plugin install example-skills@anthropic-agent-skills
+**For Claude Code:**
+```bash
+# Clone to Claude Code skills directory
+git clone https://github.com/suminhthanh/zalo-mini-app-skills.git
+cp -r zalo-mini-app-skills/skills/zalo-mini-app ~/.claude/skills/
 ```
 
-After installing the plugin, you can use the skill by just mentioning it. For instance, if you install the `document-skills` plugin from the marketplace, you can ask Claude Code to do something like: "Use the PDF skill to extract the form fields from `path/to/some-file.pdf`"
-
-## Claude.ai
-
-These example skills are all already available to paid plans in Claude.ai. 
-
-To use any skill from this repository or upload custom skills, follow the instructions in [Using skills in Claude](https://support.claude.com/en/articles/12512180-using-skills-in-claude#h_a4222fa77b).
-
-## Claude API
-
-You can use Anthropic's pre-built skills, and upload custom skills, via the Claude API. See the [Skills API Quickstart](https://docs.claude.com/en/api/skills-guide#creating-a-skill) for more.
-
-# Creating a Basic Skill
-
-Skills are simple to create - just a folder with a `SKILL.md` file containing YAML frontmatter and instructions. You can use the **template-skill** in this repository as a starting point:
-
-```markdown
----
-name: my-skill-name
-description: A clear description of what this skill does and when to use it
----
-
-# My Skill Name
-
-[Add your instructions here that Claude will follow when this skill is active]
-
-## Examples
-- Example usage 1
-- Example usage 2
-
-## Guidelines
-- Guideline 1
-- Guideline 2
+**For Project-level:**
+```bash
+mkdir -p .claude/skills
+cp -r zalo-mini-app-skills/skills/zalo-mini-app .claude/skills/
 ```
 
-The frontmatter requires only two fields:
-- `name` - A unique identifier for your skill (lowercase, hyphens for spaces)
-- `description` - A complete description of what the skill does and when to use it
+### Option 3: Direct Download
 
-The markdown content below contains the instructions, examples, and guidelines that Claude will follow. For more details, see [How to create custom skills](https://support.claude.com/en/articles/12512198-creating-custom-skills).
+```bash
+# Download and extract
+curl -L https://github.com/suminhthanh/zalo-mini-app-skills/archive/main.zip -o skill.zip
+unzip skill.zip
+cp -r zalo-mini-app-skills-main/skills/zalo-mini-app ~/.claude/skills/
+```
 
-# Partner Skills
+## Supported Agents
 
-Skills are a great way to teach Claude how to get better at using specific pieces of software. As we see awesome example skills from partners, we may highlight some of them here:
+| Agent | Skills Directory |
+|-------|-----------------|
+| Claude Code | `~/.claude/skills/` or `.claude/skills/` |
+| Cursor | `~/.cursor/skills/` or `.cursor/skills/` |
+| OpenCode | `~/.opencode/skill/` |
+| GitHub Copilot | `.github/copilot/skills/` |
+| Windsurf | `~/.windsurf/skills/` |
 
-- **Notion** - [Notion Skills for Claude](https://www.notion.so/notiondevs/Notion-Skills-for-Claude-28da4445d27180c7af1df7d8615723d0)
+## Usage
+
+Once installed, the skill activates automatically when you:
+
+- Build new Zalo Mini Apps
+- Use ZaUI components
+- Call Zalo SDK APIs
+- Integrate payments with Checkout SDK
+- Follow Zalo design guidelines
+
+### Quick Start
+
+```bash
+npm install -g zmp-cli
+zmp create my-app && cd my-app && zmp start
+```
+
+### Example Prompts
+
+- "Create a Zalo Mini App with bottom navigation"
+- "Add user authentication using Zalo authorize API"
+- "Implement a product list with ZaUI components"
+- "Integrate Checkout SDK for payment"
+
+## Skill Structure
+
+```
+zalo-mini-app/
+├── SKILL.md                    # Main skill file
+└── references/
+    ├── getting-started.md      # Setup & deployment
+    ├── api-overview.md         # API categories
+    ├── api-user.md             # User APIs
+    ├── api-storage.md          # Storage APIs
+    ├── api-ui.md               # UI APIs
+    ├── api-device.md           # Device APIs
+    ├── api-zalo.md             # Zalo integration
+    ├── zaui-overview.md        # Components overview
+    ├── zaui-layout.md          # Layout components
+    ├── zaui-display.md         # Display components
+    ├── zaui-form.md            # Form components
+    ├── zaui-overlay.md         # Overlay components
+    └── design-guidelines.md    # Design standards
+```
+
+## Resources
+
+- [Zalo Mini App Documentation](https://miniapp.zaloplatforms.com/documents/)
+- [Mini App Center](https://miniapp.zaloplatforms.com/)
+- [Agent Skills Specification](https://agentskills.io/specification)
+
+## License
+
+MIT
